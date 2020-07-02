@@ -6,6 +6,9 @@ version for any given package. Since each package may have a different API
 version, and we have have > 15k of API protos, we require machine assistance to
 scale the upgrade process.
 
+You will need to set the environment variable `LLVM_CONFIG` as per the
+[Clang Libtooling setup guide](tools/clang_tools/README.md).
+
 We refer to the process of upgrading Envoy to the latest version of the API as
 *API boosting*. This is a manual process, where a developer wanting to bump
 major version at the API clock invokes:
@@ -18,8 +21,6 @@ followed by `fix_format`. The full process is still WiP, but we expect that
 there will be some manual fixup required of test cases (e.g. YAML fragments) as
 well.
 
-You will need to configure `LLVM_CONFIG` as per the [Clang Libtooling setup
-guide](tools/clang_tools/README.md).
 
 ## Status
 

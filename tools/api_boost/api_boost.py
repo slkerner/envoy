@@ -145,7 +145,7 @@ def ApiBoostTree(target_paths,
   # a cleaner approach.
   llvm_include_path = os.path.join(
       sp.check_output([os.getenv('LLVM_CONFIG'), '--libdir']).decode().rstrip(),
-      'clang/9.0.0/include')
+      'clang/10.0.0/include')
 
   # Determine the files in the target dirs eligible for API boosting, based on
   # known files in the compilation database.
@@ -194,6 +194,13 @@ if __name__ == '__main__':
   parser.add_argument('--sequential', action='store_true')
   parser.add_argument('paths', nargs='*', default=['source', 'test', 'include'])
   args = parser.parse_args()
+
+  if not os.environ.get('LLVM_CONFIG'):
+    raise ValueError(
+        'Environment variable LLVM_CONFIG must be set to the path to the '
+        'llvm-config binary.  That program should be installed with Clang. '
+        'See tools/clang_tools/README.md for details.')
+
   ApiBoostTree(args.paths,
                generate_compilation_database=args.generate_compilation_database,
                build_api_booster=args.build_api_booster,

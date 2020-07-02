@@ -22,9 +22,13 @@ To build a tool, set the following environment variable:
 export LLVM_CONFIG=<path to clang installation>/bin/llvm-config
 ```
 
-Assuming that `CC` and `CXX` already point at Clang, you should be able to build
-with:
+Environment variables `CC` and `CXX` should point to the same version of clang:
+```console
+export CC=<path to clang installation>/bin/clang
+export CXX=<path to clang installation>/bin/clang++
+```
 
+Now you can build the example binary:
 ```console
 bazel build @envoy_dev//clang_tools/syntax_only
 ```
@@ -50,6 +54,6 @@ bazel-bin/external/envoy_dev/clang_tools/syntax_only/syntax_only \
 
 Follow the example at `tools/clang_tools/syntax_only`, based on the tutorial
 example at https://clang.llvm.org/docs/LibTooling.html. Please use the
-`envoy_clang_tools_cc_binary` Bazel macro for the tool, this disables use of
+`clang_tools_cc_binary` Bazel macro for the tool, this disables use of
 RTTI/exceptions and allows developer tools to be structurally excluded from the
 build as needed.
